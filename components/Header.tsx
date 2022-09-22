@@ -14,8 +14,11 @@ import {
   SpeakerWaveIcon,
   VideoCameraIcon
 } from '@heroicons/react/24/outline'
+import { signIn, signOut, useSession } from 'next-auth/react'
 
 function Header() {
+  const { data: session } = useSession();
+
   return <div className='sticky top-0 z-50 flex bg-white px-4 py-4 shadow-sm'>
     <div className="relative h-10 w-20 flex-shrink-0">
         <Image objectFit='contain' src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Reddit_logo_new.svg/1024px-Reddit_logo_new.svg.png" layout='fill'/>
@@ -53,18 +56,38 @@ function Header() {
       <Bars3Icon className="icon" />
     </div>
     {/* Sing In / Sign Out button */}
-    <div className='hidden cursor-pointer items-center space-x-2
-       border-gray-100 p-2 lg:flex'
-    >
-      <div className='relative h-5 w-5 flex-shrink-0'>
-        <Image 
-          src="https://cdn-icons-png.flaticon.com/512/52/52053.png"
-          objectFit='contain'
-          layout='fill'
-          alt="" />
+    {session ? (
+      <div onClick={() => signOut()} className='hidden cursor-pointer items-center space-x-2
+          border-gray-100 p-2 lg:flex'
+      >
+        <div className='relative h-5 w-5 flex-shrink-0'>
+          <Image 
+            src="https://cdn-icons-png.flaticon.com/512/52/52053.png"
+            objectFit='contain'
+            layout='fill'
+            alt="" />
+        </div>
+        <div className='flex-1 text-xs'>
+          <p className='truncate'>{session?.user?.name}</p>
+          <p className='text-gray-400'>1 Karma</p>
+        </div>
+        <ChevronDownIcon className='h-5 flex-shrink-0 text-gray-400'/>      
       </div>
-      <p className='text-gray-400'>Sign In</p>      
-    </div>
+    ) : (
+      <div onClick={() => signIn()} className='hidden cursor-pointer items-center space-x-2
+        border-gray-100 p-2 lg:flex'
+      >
+        <div className='relative h-5 w-5 flex-shrink-0'>
+          <Image 
+            src="https://cdn-icons-png.flaticon.com/512/52/52053.png"
+            objectFit='contain'
+            layout='fill'
+            alt="" />
+        </div>
+        <p className='text-gray-400'>Sign In</p>      
+      </div>
+    )}
+    
   </div>
 }
 
