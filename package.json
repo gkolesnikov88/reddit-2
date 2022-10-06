@@ -6,7 +6,9 @@
     "start": "next start"
   },
   "dependencies": {
+    "@apollo/client": "^3.7.0",
     "@heroicons/react": "^2.0.10",
+    "graphql": "^16.6.0",
     "next": "latest",
     "next-auth": "^4.10.3",
     "react": "18.1.0",
