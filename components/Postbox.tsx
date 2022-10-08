@@ -1,6 +1,6 @@
 import { LinkIcon, PhotoIcon } from '@heroicons/react/24/outline';
 import { useSession } from 'next-auth/react'
-import React from 'react'
+import React, { useState } from 'react'
 import Avatar from './Avatar';
 import { useForm } from 'react-hook-form';
 
@@ -13,6 +13,7 @@ type FormData = {
 
 function Postbox() {
   const { data: session } = useSession();
+  const [imageBoxOpen, setImageBoxOpen] = useState<boolean>(false);
   const { register, handleSubmit, watch, formState: { errors } } =
     useForm<FormData>();
 
@@ -31,9 +32,47 @@ function Postbox() {
                     'Sign in to post'
             }/>
 
-            <PhotoIcon className={`h-6 text-gray-300 cursor-pointer`}/>
+            <PhotoIcon 
+                onClick={() => {setImageBoxOpen(!imageBoxOpen)}}
+                className={`h-6 text-gray-300 cursor-pointer ${imageBoxOpen && 'text-blue-300'}`}/>
             <LinkIcon className={`h-6 text-gray-300 cursor-pointer`}/>
         </div>
+
+        {!!watch('postTitle') && (
+            <div className='flex flex-col px-2'>
+                <div className='flex items-center px-2'>
+                    <p className='min-w-[90px]'>Body:</p>
+                    <input
+                        className='m-2 flex-1 bg-blue-50 p-2 outline-none' 
+                        type="text" 
+                        placeholder='Text (optional)'
+                        {...register('postBody')}
+                    />
+                </div>
+                
+                <div className='flex items-center px-2'>
+                    <p className='min-w-[90px]'>Subreddit:</p>
+                    <input
+                        className='m-2 flex-1 bg-blue-50 p-2 outline-none' 
+                        type="text" 
+                        placeholder='i.e. reactjs'
+                        {...register('subreddit')}
+                    />
+                </div>
+
+                { imageBoxOpen && 
+                    <div className='flex items-center px-2'>
+                        <p className='min-w-[90px]'>Image URL:</p>
+                        <input
+                            className='m-2 flex-1 bg-blue-50 p-2 outline-none' 
+                            type="text" 
+                            placeholder='Optional...'
+                            {...register('postImage')}
+                        />
+                    </div>
+                }
+            </div>
+        )}
     </form>
   )
 }
