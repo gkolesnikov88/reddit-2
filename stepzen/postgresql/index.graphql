@@ -97,6 +97,7 @@ type Query {
       SELECT T."created_at", T."id", T."post_id", T."upwork", T."username"
         FROM "public"."vote" T
         WHERE T."post_id" = $1
+        ORDERED BY "created_at" DESK
       """
       configuration: "postgresql_config"
     )
