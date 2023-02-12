@@ -46,6 +46,7 @@ function Post({post}: Props) {
         </div>
 
         {/* Image */}
+        <img className='w-full' src={post.image} alt="" />
 
         {/* Footer */}
       </div>
