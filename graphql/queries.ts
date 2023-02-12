@@ -8,9 +8,9 @@ export const GET_ALL_POSTS = gql`
             id
             image
             title
-            subredit_id
+            subreddit_id
             username
-            comments {
+            commentList {
                 created_at
                 id
                 post_id
@@ -22,7 +22,7 @@ export const GET_ALL_POSTS = gql`
                 id
                 topic
             }
-            votes {
+            voteList {
                 created_at
                 id
                 post_id
