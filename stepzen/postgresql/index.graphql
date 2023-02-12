@@ -17,7 +17,7 @@ type Post {
   created_at: DateTime
   id: ID!
   image: String
-  subreddit: Subreddit
+  subreddit: [Subreddit]
     @materializer(
       query: "getSubreddit"
       arguments: [{ name: "id", field: "subreddit_id" }]
@@ -117,7 +117,7 @@ type Query {
       """
       configuration: "postgresql_config"
     )
-  getSubreddit(id: ID!): Subreddit
+  getSubreddit(id: ID!): [Subreddit]
     @dbquery(
       type: "postgresql"
       schema: "public"
