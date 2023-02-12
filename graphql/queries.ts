@@ -10,7 +10,7 @@ export const GET_ALL_POSTS = gql`
             title
             subreddit_id
             username
-            commentList {
+            comments {
                 created_at
                 id
                 post_id

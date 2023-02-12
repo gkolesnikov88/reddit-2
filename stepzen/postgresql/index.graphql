@@ -13,7 +13,7 @@ type Comment {
 
 type Post {
   body: String
-  commentList: [Comment] @materializer(query: "getCommentUsingPost_id")
+  comments: [Comment] @materializer(query: "getCommentUsingPost_id")
   created_at: DateTime
   id: ID!
   image: String

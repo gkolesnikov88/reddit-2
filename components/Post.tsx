@@ -3,14 +3,14 @@ import TimeAgo from 'react-timeago';
 import {
   ArrowDownIcon,
   ArrowUpIcon,
+} from '@heroicons/react/24/solid';
+import {
+  EllipsisHorizontalIcon,
+  ChatBubbleLeftEllipsisIcon,
   BookmarkIcon,
   GiftIcon,
-  ShareIcon,
-  ChatBubbleBottomCenterIcon
-} from '@heroicons/react/24/solid';
-// import {
-//   // DotsHorizontalIcon
-// } from '@heroicons/react/24/outline';
+  ShareIcon
+} from '@heroicons/react/24/outline';
 import Avatar from './Avatar';
 
 type Props = {
@@ -49,6 +49,27 @@ function Post({post}: Props) {
         <img className='w-full' src={post.image} alt="" />
 
         {/* Footer */}
+        <div className='flex space-x-4 text-gray-400'>
+          <div className='postButtons'>
+            <ChatBubbleLeftEllipsisIcon className='h-6 w-6'/>
+            <p className=''>{post.comments.length} Comments</p>  
+          </div>
+          <div className='postButtons'>
+            <GiftIcon className='h-6 w-6'/>
+            <p className='hidden sm:inline'>Award</p>  
+          </div>
+          <div className='postButtons'>
+            <ShareIcon className='h-6 w-6'/>
+            <p className='hidden sm:inline'>Share</p>  
+          </div>
+          <div className='postButtons'>
+            <BookmarkIcon className='h-6 w-6'/>
+            <p className='hidden sm:inline'>Save</p>  
+          </div>
+          <div className='postButtons'>
+            <EllipsisHorizontalIcon className='h-6 w-6'/>
+          </div> 
+        </div>
       </div>
     </div>
   )
