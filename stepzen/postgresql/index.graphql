@@ -77,6 +77,33 @@ type Query {
       """
       configuration: "postgresql_config"
     )
+
+  getPostListByPostId(post_id: ID!) : Post
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+        SELECT *
+        FROM "post"
+        WHERE "post".id = $1
+      """
+      configuration: "postgresql_config"
+    )
+
+  getPostListByTopic(topic: String!) : [Post]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+        SELECT *, "post".id as id 
+        FROM "post"
+          JOIN "subreddit" on "subreddit".id = "post"."subreddit_id"
+        WHERE "subreddit".topic = $1
+        ORDER BY "post"."created_at" DESC
+      """
+      configuration: "postgresql_config"
+    )
+
   getPost(id: ID!): Post
     @dbquery(
       type: "postgresql"
