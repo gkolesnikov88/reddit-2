@@ -8,14 +8,14 @@ function PostPage() {
     const router = useRouter();
     const { data } = useQuery(GET_POST_BY_POST_ID, {
         variables: {
-            post_id: router.query.postId
+            post_id: router.query.postid
         }
     });
 
     const post: Post = data?.getPostListByPostId;
 
     return (
-        <div>
+        <div className='mx-auto my-7 max-w-5xl'>
             <Post post={post}/>
         </div>
     )
