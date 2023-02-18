@@ -25,7 +25,7 @@ type Post {
   subreddit_id: ID
   title: String
   username: String
-  voteList: [Vote] @materializer(query: "getVoteUsingPost_id")
+  voteList: [Vote] @materializer(query: "getVotesByPostId")
 }
 
 type Subreddit {
@@ -121,14 +121,14 @@ type Query {
       """
       configuration: "postgresql_config"
     )
-  getVoteUsingPost_id(id: ID!): [Vote]
+  getVotesByPostId(id: ID!): [Vote]
     @dbquery(
       type: "postgresql"
       query: """
       SELECT T."created_at", T."id", T."post_id", T."upvote", T."username"
         FROM "public"."vote" T
         WHERE T."post_id" = $1
-        ORDER BY T."id" DESC       
+        ORDER BY T."created_at" DESC       
       """
       configuration: "postgresql_config"
     )
@@ -245,7 +245,6 @@ type Mutation {
     )
   insertVote(
     post_id: ID!
-    created_at: DateTime!
     upvote: Boolean!
     username: String!
   ): Vote
