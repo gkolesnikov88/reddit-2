@@ -15,8 +15,9 @@ function Avatar({seed, large}: Props) {
         `relative h-10 w-10 overflow-hidden rounded-full border-gray-100 bg-white
         ${large && 'h-20 w-20'}
         `}>
-        <Image 
-            layout='fill'
+        <Image
+            fill 
+            alt='User image'
             src={`https://avatars.dicebear.com/api/open-peeps/${
                 seed || session?.user?.name || 'placeholder'
             }.svg`}/>
