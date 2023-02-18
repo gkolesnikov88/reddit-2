@@ -23,8 +23,10 @@ function Header() {
   return <div className='sticky top-0 z-50 flex items-center bg-white px-4 py-2 shadow-sm'>
     <div className="relative h-10 w-20 flex-shrink-0">
         <Link href="/">
-          <Image className='cursor-pointer'
-            objectFit='contain' src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Reddit_logo_new.svg/1024px-Reddit_logo_new.svg.png" layout='fill'/>
+          <Image 
+            alt='Logo'
+            className='cursor-pointer object-contain'
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Reddit_logo_new.svg/1024px-Reddit_logo_new.svg.png" layout='fill'/>
         </Link>
     </div>
 
